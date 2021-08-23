@@ -1,4 +1,4 @@
-pipeline {
+ pipeline {
     agent { label "master" }
     environment {
         PATH=sh(script:"echo $PATH:/usr/local/bin", returnStdout:true).trim()
@@ -160,9 +160,9 @@ pipeline {
                 sh 'ansible-playbook -vvv --connection=local --inventory 127.0.0.1, --extra-vars "workspace=${WORKSPACE} master_public_ip=${GRAND_MASTER_PUBLIC_IP}" ./ansible/playbooks/pb_run_selenium_jobs.yaml'
             }
         }
-    }
+    } */
 
-  /*   post {
+    post {
         always {
             echo 'Deleting all local images'
             sh 'docker image prune -af'
@@ -179,6 +179,6 @@ pipeline {
             sh "aws ec2 delete-key-pair --region ${AWS_REGION} --key-name ${CFN_KEYPAIR}"
             sh "rm -rf ${CFN_KEYPAIR}"
         }
-    } */
+    }
 }
 
